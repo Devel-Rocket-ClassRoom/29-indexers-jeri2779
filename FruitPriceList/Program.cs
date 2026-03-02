@@ -34,47 +34,106 @@ for (int i = 0; i < list.Count; i++)
 //{
 //    Console.WriteLine($"{}가격: {}");
 //} /사용 가능?
+//class FruitPriceList
+//{
+//    private string[] _names;
+//    private int[] _prices;
+//    private int _count = 0;
+
+//    public FruitPriceList(int capacity)// 생성자
+//    {
+//        _names = new string[capacity];
+//        _prices = new int[capacity];
+//    }
+
+//    public int Count//메서드
+//    {
+//        get { return _count; }
+//    }
+//    public void Add(string name, int price)
+//    {
+//        _names[_count] = name;
+//        _prices[_count] = price;
+//        _count++;
+//    }
+
+//    public int this[string name]// 인덱서
+//    {
+//        get
+//        {
+//            for (int i = 0; i < _count; i++)
+//            {
+//                if (_names[i] == name)
+//                    return _prices[i];
+//            }
+//            return -1;
+//        }
+//    }
+//    public string this[int index]// 인덱서
+//    {
+//        get
+//        {
+//            return _names[index];
+//        }
+//    }
+
+//}
+
 class FruitPriceList
 {
-    private string[] _names;
-    private int[] _prices;
-    private int _count = 0;
+    string[] _names;
+    int[] _prices;
+    int _count;
 
-    public FruitPriceList(int capacity)
+        public FruitPriceList(int capacity)
     {
         _names = new string[capacity];
         _prices = new int[capacity];
     }
 
-    public int Count
-    {
-        get { return _count; }
-    }
+    //속성
+    public int Count { get { return _count; } }
+
     public void Add(string name, int price)
     {
-        _names[_count] = name;
-        _prices[_count] = price;
-        _count++;
+        //과일을 추가함. 용량 초과 시 "가격표가 가득 찼습니다."를 출력함
+        if (_count < _names.Length)
+        {
+            _names[_count] = name;
+            _prices[_count] = price;
+            _count++;
+
+        }
+        else
+        {
+            Console.WriteLine("가격표가 가득 찼습니다.");
+        } 
     }
 
-    public int this[string name]
+        //인덱서
+        public int this[string name]
     {
         get
         {
             for (int i = 0; i < _count; i++)
             {
                 if (_names[i] == name)
+                {
                     return _prices[i];
+
+                }
+                //else
+                //{
+                //    return -1;
+                //}
             }
+
             return -1;
         }
     }
-    public string this[int index]
-    {
-        get
-        {
-            return _names[index];
-        }
-    }
 
+        public string this[int index]
+    {
+        get { return (index < _count) ? _names[index] : ""; }
+    }
 }
